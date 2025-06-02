@@ -1,4 +1,4 @@
-public interface IDisplayBulletinListService<T>
+public interface IBulletinTypeListService<T>
 {
     Task<List<T>> GetBulletinListByDate<U>(U Type);
 }

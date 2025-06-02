@@ -2,6 +2,9 @@
 bin/
 obj/
 
+#Ignore Working Out Folder
+OldServices/
+
 # User-specific files
 *.user
 *.suo

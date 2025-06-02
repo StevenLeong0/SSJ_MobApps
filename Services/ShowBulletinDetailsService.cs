@@ -3,10 +3,13 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDbSettingsabc;
 
-public class ShowBulletinService<T> : IShowBulletinService<T> where T : IBulletinModel
+//T is generic so you can put MemberBulletin or OfficialBulletin [StevenLeong]
+public class ShowBulletinDetailsService<T> : IShowBulletinService<T> where T : IBulletinModel
 {
     private readonly IMongoCollection<T> _Bulletin;
-    public ShowBulletinService(IOptions<MongoDbSettings> dbSettings)
+
+    //check with Tyson
+    public ShowBulletinDetailsService(IOptions<MongoDbSettings> dbSettings)
     {
         var client = new MongoClient(dbSettings.Value.ConnectionString);
         var database = client.GetDatabase(dbSettings.Value.DatabaseName);

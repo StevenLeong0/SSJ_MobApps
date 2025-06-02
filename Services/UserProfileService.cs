@@ -1,15 +1,32 @@
-using MongoDB.Driver;
+using Microsoft.Extensions.Options;
 using MongoDB.Bson;
+using MongoDB.Driver;
 using BCryptHash = BCrypt.Net.BCrypt;
 
 
-public class UpdateUserProfileService
+public class UserProfileService
 {
     private readonly IMongoCollection<User> _user;
-    public UpdateUserProfileService(IMongoDatabase MongoDb)
+    public UserProfileService(IMongoDatabase MongoDb)
     {
         _user = MongoDb.GetCollection<User>("User");
     }
+    public async Task<User> GetUserProfile(string IdString)
+    {
+        if (ObjectId.TryParse(IdString, out ObjectId objectId))
+        {
+            var filter = Builders<User>.Filter.Eq("_id", objectId);
+            var UserProfile = await _user
+            .Find(filter)
+            .FirstOrDefaultAsync();
+            return UserProfile;
+        }
+        else
+        {
+            throw new ArgumentException("Invalid Id", nameof(IdString));
+        }
+    }
+    //UpdateUserProfileMethods
     public async Task PartialUpdateUserPassword(string IdString, string Password)
     {
         if (ObjectId.TryParse(IdString, out ObjectId objectId))
@@ -54,6 +71,5 @@ public class UpdateUserProfileService
         {
             throw new ArgumentException("Invalid Id", nameof(IdString));
         }
-
     }
 }
