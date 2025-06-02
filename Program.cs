@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Bind Settings
 builder.Services.Configure<MongoDbSettings>(
 builder.Configuration.GetSection("MongoDbSettings"));
-// Add services to the container.
+
 
 // dependency injection uses types to call methods rather than names
 builder.Services.AddSingleton<MongoClient>(sp =>
@@ -22,6 +22,12 @@ builder.Services.AddSingleton<IMongoDatabase>(sp =>
     var client = sp.GetRequiredService<MongoClient>();
     return client.GetDatabase(settings.DatabaseName);
 });
+// Add services to the container.
+//Check if you registered this correctly
+builder.Services.AddScoped<IBulletinTypeListService<MemberBulletin>, MemberBulletinListService>();
+builder.Services.AddScoped<IBulletinTypeListService<OfficialBulletin>, OfficialBulletinService>();
+builder.Services.AddScoped<UserProfileService>();
+builder.Services.AddScoped<UserSettingService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

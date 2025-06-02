@@ -9,11 +9,9 @@ public class ShowBulletinDetailsService<T> : IShowBulletinService<T> where T : I
     private readonly IMongoCollection<T> _Bulletin;
 
     //check with Tyson
-    public ShowBulletinDetailsService(IOptions<MongoDbSettings> dbSettings)
+    public ShowBulletinDetailsService(IMongoDatabase MongoDb)
     {
-        var client = new MongoClient(dbSettings.Value.ConnectionString);
-        var database = client.GetDatabase(dbSettings.Value.DatabaseName);
-        _Bulletin = database.GetCollection<T>("Bulletin");
+        _Bulletin = MongoDb.GetCollection<T>("Bulletin");
     }
     public async Task<T> GetBulletinDetails(string IdString)
     {
@@ -27,7 +25,7 @@ public class ShowBulletinDetailsService<T> : IShowBulletinService<T> where T : I
         }
         else
         {
-            // need to write a try-catch block to catch this exception
+            //TASK1: need to write a try-catch block to catch this exception
             throw new ArgumentException("Invalid Id", nameof(objectId));
         }
     }

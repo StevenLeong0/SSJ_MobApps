@@ -36,11 +36,13 @@ public class MemberBulletinListService : IBulletinTypeListService<MemberBulletin
                 }
                 else
                 {
+                    //TASK1Member: need to write a try-catch block to catch this exception
                     throw new ArgumentException("Invalid Id: UserCollection", nameof(_user));
                 }
             }
             else
             {
+                //TASK1Member: need to write a try-catch block to catch this exception
                 throw new ArgumentException("Invalid Id: AuthorObjectId", nameof(m.Author));
             }
         }
@@ -70,6 +72,7 @@ public class MemberBulletinListService : IBulletinTypeListService<MemberBulletin
         }
         else
         {
+            //TASK1Member: need to write a try-catch block to catch this exception
             throw new ArgumentException("Invalid Id", nameof(IdString));
         }
     }

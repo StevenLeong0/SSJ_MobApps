@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDbSettingsabc;
+
 
 public class OfficialBulletinService : IBulletinTypeListService<OfficialBulletin>
 {
@@ -44,6 +44,7 @@ public class OfficialBulletinService : IBulletinTypeListService<OfficialBulletin
         }
         else
         {
+            //TASK1Official: need to write a try-catch block to catch this exception
             throw new ArgumentException("Invalid Id", nameof(IdString));
         }
     }

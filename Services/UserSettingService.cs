@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDbSettingsabc;
+
 
 public class UserSettingService
 {
@@ -24,6 +24,7 @@ public class UserSettingService
         }
         else
         {
+            //TASK1Settings: need to write a try-catch block to catch this exception
             throw new ArgumentException("Invalid Id", nameof(IdString));
         }
     }
@@ -40,6 +41,7 @@ public class UserSettingService
         }
         else
         {
+            //TASK1Settings: need to write a try-catch block to catch this exception
             throw new ArgumentException("Invalid Id", nameof(IdString));
         }
     }

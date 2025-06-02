@@ -39,6 +39,7 @@ public class UserProfileService
         }
         else
         {
+            //TASK1User: need to write a try-catch block to catch this exception
             throw new ArgumentException("Invalid Id", nameof(IdString));
         }
     }
@@ -55,6 +56,7 @@ public class UserProfileService
         }
         else
         {
+            //TASK1User: need to write a try-catch block to catch this exception
             throw new ArgumentException("Invalid Id", nameof(IdString));
         }
     }
@@ -69,6 +71,7 @@ public class UserProfileService
         }
         else
         {
+            //TASK1User: need to write a try-catch block to catch this exception
             throw new ArgumentException("Invalid Id", nameof(IdString));
         }
     }
