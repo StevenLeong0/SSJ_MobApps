@@ -31,7 +31,7 @@ public class OfficialBulletinService : IBulletinTypeListService<OfficialBulletin
         };
         await _officialBulletinList.InsertOneAsync(newOfficialBulletin);
     }
-        public async Task FullUpdateOfficialBulletin(string IdString, string Title, OfficialType Type, string Content)
+    public async Task FullUpdateOfficialBulletin(string IdString, string Title, OfficialType Type, string Content)
     {
         if (ObjectId.TryParse(IdString, out ObjectId objectId))
         {
@@ -45,6 +45,19 @@ public class OfficialBulletinService : IBulletinTypeListService<OfficialBulletin
         else
         {
             //TASK1Official: need to write a try-catch block to catch this exception
+            throw new ArgumentException("Invalid Id", nameof(IdString));
+        }
+    }
+    public async Task DeleteOfficialBulletin(string IdString)
+    {
+        if (ObjectId.TryParse(IdString, out ObjectId objectId))
+        {
+            var filter = Builders<OfficialBulletin>.Filter.Eq("_id", objectId);
+            await _officialBulletinList.DeleteOneAsync(filter);
+        }
+        else
+        {
+            //TASK1Member: need to write a try-catch block to catch this exception
             throw new ArgumentException("Invalid Id", nameof(IdString));
         }
     }

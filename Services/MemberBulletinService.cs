@@ -1,4 +1,6 @@
+using System.Collections.ObjectModel;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 
 public class MemberBulletinListService : IBulletinTypeListService<MemberBulletin>
@@ -69,6 +71,19 @@ public class MemberBulletinListService : IBulletinTypeListService<MemberBulletin
             .Set(b => b.Type, Type)
             .Set(b => b.Content, Content);
             await _memberBulletinList.UpdateOneAsync(filter, update);
+        }
+        else
+        {
+            //TASK1Member: need to write a try-catch block to catch this exception
+            throw new ArgumentException("Invalid Id", nameof(IdString));
+        }
+    }
+    public async Task DeleteMemberBulletin(string IdString)
+    {
+        if (ObjectId.TryParse(IdString, out ObjectId objectId))
+        {
+            var filter = Builders<MemberBulletin>.Filter.Eq("_id", objectId);
+            await _memberBulletinList.DeleteOneAsync(filter);
         }
         else
         {
