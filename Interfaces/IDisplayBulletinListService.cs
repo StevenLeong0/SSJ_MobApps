@@ -1,0 +1,8 @@
+public interface IDisplayBulletinListService<T>
+{
+    Task<List<T>> GetBulletinListByDate<U>(U Type);
+}
+/*Explanation
+Interface Method that returns a List of Generic type, This IMethod takes 1 parameter. The purpose of <U>(U Type) is so this method can be reused to take on MemberType and OfficialType enums. 
+
+*/
