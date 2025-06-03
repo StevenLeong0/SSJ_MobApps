@@ -9,12 +9,16 @@ public class MemberBulletin:IBulletinModel
     public required string Id { get; set; }
     public required string Title { get; set; }
     public MemberType Type { get; set; }
+    //public MemberBulletinCategory Category 
     public string? Content { get; set; }
     [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
     public DateTime? DateCreated { get; set; }
     [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
     public DateTime? DateUpdated { get; set; }
     public required string Author { get; set; }
+    //Author To AuthorId
+    //AuthorUsername
+
     public MemberBulletin()
     {
         DateCreated = DateTime.Now;

@@ -96,49 +96,49 @@ if (db.UserSetting.countDocuments({})===0){
     db.UserSetting.insertMany([
         {
             Id: userIds[0],
-            TextSize: TextSize.Large,
+            TextSize: 36,
             DarkMode: False,
             EnableNotification: false,
         },
         {
             Id: userIds[1],
-            TextSize: TextSize.Large,
+            TextSize: 36,
             DarkMode: True,
             EnableNotification: false,
         },
         {
             Id: userIds[2],
-            TextSize: TextSize.Medium,
+            TextSize: 32,
             DarkMode: True,
             EnableNotification: false,
         },
         {
             Id: userIds[3],
-            TextSize: TextSize.Small,
+            TextSize: 24,
             DarkMode: True,
             EnableNotification: false,
         },
         {
             Id: userIds[4],
-            TextSize: TextSize.Large,
+            TextSize: 36,
             DarkMode: True,
             EnableNotification: false,
         },
         {
             Id: userIds[5],
-            TextSize: TextSize.Large,
+            TextSize: 36,
             DarkMode: True,
             EnableNotification: false,
         },
         {
             Id: userIds[6],
-            TextSize: TextSize.Large,
+            TextSize: 36,
             DarkMode: True,
             EnableNotification: false,
         },
         {
             Id: userIds[7],
-            TextSize: TextSize.Large,
+            TextSize: 36,
             DarkMode: True,
             EnableNotification: false,
         }

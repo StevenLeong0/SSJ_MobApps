@@ -39,7 +39,8 @@ public class OfficialBulletinService : IBulletinTypeListService<OfficialBulletin
             var update = Builders<OfficialBulletin>.Update
             .Set(b => b.Title, Title)
             .Set(b => b.Type, Type)
-            .Set(b => b.Content, Content);
+            .Set(b => b.Content, Content)
+            .Set(b => b.DateUpdated, DateTime.Now);
             await _officialBulletinList.UpdateOneAsync(filter, update);
         }
         else

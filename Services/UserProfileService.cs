@@ -41,6 +41,7 @@ public class UserProfileService
             Role = 0,
         };
         await _user.InsertOneAsync(newUser);
+        //addUserSettingService method
     }
     
     //UpdateUserProfileMethods
@@ -76,6 +77,29 @@ public class UserProfileService
             //TASK1User: need to write a try-catch block to catch this exception
             throw new ArgumentException("Invalid Id", nameof(IdString));
         }
+    }
+    public async Task<bool> UserLogin(string Username, string Password)
+    {
+        var filter = Builders<User>.Filter.Eq("Username", Username);
+        var UserLogin = await _user
+            .Find(filter)
+            .FirstOrDefaultAsync();
+        var PasswordHash = BCryptHash.HashPassword(Password);
+        if (UserLogin != null)
+        {
+            if (UserLogin.PasswordHash == PasswordHash)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }        
     }
     public async Task PartialUpdateUsername(string IdString, string Username)
     {

@@ -29,13 +29,6 @@ public class ShowBulletinDetailsService<T> : IShowBulletinService<T> where T : I
             throw new ArgumentException("Invalid Id", nameof(objectId));
         }
     }
-        public async Task DeleteOfficialBulletin(string IdString)
-    {
-        if (ObjectId.TryParse(IdString, out ObjectId objectId))
-        {
-            var filter = Builders<OfficialBulletin>.Filter.Eq("_id", objectId);
-            await _Bulletin.DeleteOneAsync(filter);          
-        }
-    }
+
 }
 

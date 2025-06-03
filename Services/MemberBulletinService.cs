@@ -49,7 +49,7 @@ public class MemberBulletinListService : IBulletinTypeListService<MemberBulletin
             }
         }
     }
-    public async Task PostMemberBulletin(string Title, MemberType Type, string Content, string Author)
+    public async Task PostMemberBulletin(string Title, MemberType Type, string Content, string AuthorId)
     {
         MemberBulletin newMemberBulletin = new()
         {
@@ -57,7 +57,7 @@ public class MemberBulletinListService : IBulletinTypeListService<MemberBulletin
             Title = Title,
             Type = Type,
             Content = Content,
-            Author = Author
+            Author = AuthorId
         };
         await _memberBulletinList.InsertOneAsync(newMemberBulletin);
     }
@@ -69,7 +69,8 @@ public class MemberBulletinListService : IBulletinTypeListService<MemberBulletin
             var update = Builders<MemberBulletin>.Update
             .Set(b => b.Title, Title)
             .Set(b => b.Type, Type)
-            .Set(b => b.Content, Content);
+            .Set(b => b.Content, Content)
+            .Set(b => b.DateUpdated, DateTime.Now);
             await _memberBulletinList.UpdateOneAsync(filter, update);
         }
         else

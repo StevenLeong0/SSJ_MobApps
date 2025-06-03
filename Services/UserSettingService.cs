@@ -28,14 +28,14 @@ public class UserSettingService
             throw new ArgumentException("Invalid Id", nameof(IdString));
         }
     }
-    public async Task PostUserSettings(string Id, TextSize TextSize, bool DarkMode, bool EnableNotifications)
+    public async Task PostUserSettings(string Id)
     {
         UserSetting PostUserSettings = new()
         {
             Id = Id,
-            TextSize = TextSize,
-            DarkMode = DarkMode,
-            EnableNotifications = EnableNotifications,
+            TextSize = 32,
+            DarkMode = false,
+            EnableNotifications = true,
         };
         await _userSetting.InsertOneAsync(PostUserSettings);
     }
