@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SeniorLearnApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6654d0c5619a9a9f206cb71c5911505444e9347c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0e08f8fe0829a89293428e081c546c45ef0034dd")]
 [assembly: System.Reflection.AssemblyProductAttribute("SeniorLearnApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SeniorLearnApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

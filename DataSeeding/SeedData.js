@@ -152,83 +152,92 @@ if (db.MemberBulletin.countDocuments({})===0){
         {
             Id:ObjectId.GenerateNewId().ToString(),
             Title: "Ice-Cream Party",
-            Type: 2,
+            Category: 2,
             Content:"Ice Cream Party to celebrate the 1st June for all SeniorLearn Members. Buy one get one free",
             DateCreated:new Date(2025, 4, 9, 15,30,45),
             DateUpdated:DateCreated,
-            Author:userIds[1].ToString()
+            AuthorId:userIds[1].ToString(),
+            AuthorUsername:"AnonUser123"
         },
         {
             Id:ObjectId.GenerateNewId().ToString(),
             Title: "Free Dental Seniors Only",
-            Type: 2,
+            Category: 2,
             Content: "Come to Ha Loo Loo Dental for your free dental check-up. Offer lasts for the next 3 days!",
             DateCreated:new Date(2025,4,4, 15,30,45),
             DateUpdated: DateCreated,
-            Author:userIds[2].ToString()
+            AuthorId:userIds[2].ToString(),
+            AuthorUsername:"User101"
         },
         {
             Id:ObjectId.GenerateNewId().ToString(),
             Title: "Theatre Night: Matilda",
-            Type: 2,
+            Category: 2,
             Content: "She felt fairly confident that with a great deal of practice and effort, she would succeed in the end.",
             DateCreated:new Date(2025,4,3, 15,30,45),
             DateUpdated: DateCreated,
-            Author:userIds[3].ToString()
+            AuthorId:userIds[3].ToString(),
+            AuthorUsername:"TheatreSenior"
         },
         {
             Id:ObjectId.GenerateNewId().ToString(),
             Title: "Martial Arts Lessons",
-            Type: 1,
+            Category: 1,
             Content: "Whenever you can separate Yin and Yang, one part doesn’t move, the other part moves, there has to be a relationship between them.",
             DateCreated:new Date(2025,4,9, 15,30,45),
             DateUpdated: DateCreated,
-            Author:userIds[4].ToString()
+            AuthorId:userIds[4].ToString(),
+            AuthorUsername:"ChenZhonghua"
         },
         {
             Id:ObjectId.GenerateNewId().ToString(),
             Title: "Boogie Woogie",
-            Type: 1,
+            Category: 1,
             Content: "Just joking, I'm gonna teach programming instead",
             DateCreated:new Date(2025,4,4, 15,30,45),
             DateUpdated: DateCreated,
-            Author:userIds[5].ToString()
+            AuthorId:userIds[5].ToString(),
+            AuthorUsername:"Peter"
         },
         {
             Id: ObjectId.GenerateNewId().ToString(),
             Title:"Seance Magic Talk to your Wife Today!!",
-            Type:1,
+            Category:1,
             Content: "For the cheap price of $99, talk to the dead!!",
             DateCreated:new Date(2025,4,3, 15,30,45),
             DateUpdated: DateCreated,
-            Author:userIds[6].ToString()
+            AuthorId:userIds[6].ToString(),
+            AuthorUsername:"SeniorScammer"
         },
         {
             Id: ObjectId.GenerateNewId().ToString(),
             Title:"CelebratingSeniorLearnFan!!",
-            Type:3,
+            Category:3,
             Content: "Woohoo",
             DateCreated:new Date(2025,4,9, 15,30,45),
             DateUpdated: DateCreated,
-            Author:userIds[7].ToString()
+            AuthorId:userIds[7].ToString(),
+            AuthorUsername:"SeniorLearnFan"
         },
         {
             Id: ObjectId.GenerateNewId().ToString(),
             Title:"CelebratingSeniorLearnFan!!",
-            Type:3,
+            Category:3,
             Content: "Woohoo",
             DateCreated:new Date(2025,4,4, 15,30,45),
             DateUpdated: DateCreated,
-            Author:userIds[7].ToString()
+            AuthorId:userIds[7].ToString(),
+            AuthorUsername:"SeniorLearnFan"
         },
         {
             Id: ObjectId.GenerateNewId().ToString(),
             Title:"SeniorLearn App Out Now!",
-            Type:3,
+            Category:3,
             Content: "Seniors need to learn technology now!! WOO HOO",
             DateCreated:new Date(2025,4,3, 15,30,45),
             DateUpdated: DateCreated,
-            Author:userIds[7].ToString()
+            AuthorId:userIds[7].ToString(),
+            AuthorUsername:"SeniorLearnFan"
         }
     ])
 };

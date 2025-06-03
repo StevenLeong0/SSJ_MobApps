@@ -13,28 +13,30 @@ public class MemberBulletinListService : IBulletinTypeListService<MemberBulletin
         _user = database.GetCollection<User>("User");
     }
     //Task for async
-    public async Task<List<MemberBulletin>> GetBulletinListByDate<MemberType>(MemberType Type)
+    public async Task<List<MemberBulletin>> GetBulletinListByDate<MemberBulletinCategory>(MemberBulletinCategory Category)
     {
-        var filter = Builders<MemberBulletin>.Filter.Eq("Type", Type);
+        var filter = Builders<MemberBulletin>.Filter.Eq("Category", Category);
         var result = await _memberBulletinList
         .Find(filter)
         .SortByDescending(b => b.DateCreated)
         .ToListAsync();
+
+        //Changes Made: Keep Author as Username
         //change author from objectid to username;
-        await ReplaceAuthorIdwithUserService(result);
+        // await ReplaceAuthorIdwithUserService(result);
         return result;
     }
-    private async Task ReplaceAuthorIdwithUserService(List<MemberBulletin> memberBulletinList)
+    private async Task ReplaceAuthorIdIdwithUserService(List<MemberBulletin> memberBulletinList)
     {
         foreach (var m in memberBulletinList)
         {
-            if (ObjectId.TryParse(m.Author, out ObjectId AuthorObjectId))
+            if (ObjectId.TryParse(m.AuthorId, out ObjectId AuthorObjectId))
             {
                 var filter = Builders<User>.Filter.Eq("_id", AuthorObjectId);
                 var user = await _user.Find(filter).FirstOrDefaultAsync();
                 if (user != null)
                 {
-                    m.Author = user.Username;
+                    m.AuthorUsername = user.Username;
                 }
                 else
                 {
@@ -45,30 +47,31 @@ public class MemberBulletinListService : IBulletinTypeListService<MemberBulletin
             else
             {
                 //TASK1Member: need to write a try-catch block to catch this exception
-                throw new ArgumentException("Invalid Id: AuthorObjectId", nameof(m.Author));
+                throw new ArgumentException("Invalid Id: AuthorObjectId", nameof(m.AuthorId));
             }
         }
     }
-    public async Task PostMemberBulletin(string Title, MemberType Type, string Content, string AuthorId)
+    public async Task PostMemberBulletin(string Title, MemberBulletinCategory Category, string Content, string AuthorId, string AuthorUsername)
     {
         MemberBulletin newMemberBulletin = new()
         {
             Id = ObjectId.GenerateNewId().ToString(),
             Title = Title,
-            Type = Type,
+            Category = Category,
             Content = Content,
-            Author = AuthorId
+            AuthorId = AuthorId,
+            AuthorUsername = AuthorUsername
         };
         await _memberBulletinList.InsertOneAsync(newMemberBulletin);
     }
-    public async Task FullUpdateMemberBulletin(string IdString, string Title, MemberType Type, string Content)
+    public async Task FullUpdateMemberBulletin(string IdString, string Title, MemberBulletinCategory Category, string Content)
     {
         if (ObjectId.TryParse(IdString, out ObjectId objectId))
         {
             var filter = Builders<MemberBulletin>.Filter.Eq("_id", objectId);
             var update = Builders<MemberBulletin>.Update
             .Set(b => b.Title, Title)
-            .Set(b => b.Type, Type)
+            .Set(b => b.Category, Category)
             .Set(b => b.Content, Content)
             .Set(b => b.DateUpdated, DateTime.Now);
             await _memberBulletinList.UpdateOneAsync(filter, update);

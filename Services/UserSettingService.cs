@@ -39,7 +39,7 @@ public class UserSettingService
         };
         await _userSetting.InsertOneAsync(PostUserSettings);
     }
-        public async Task UpdateUserSetting(string IdString, TextSize TextSize, bool DarkMode, bool EnableNotifications)
+        public async Task UpdateUserSetting(string IdString, int TextSize, bool DarkMode, bool EnableNotifications)
     {
         if (ObjectId.TryParse(IdString, out ObjectId objectId))
         {
