@@ -7,9 +7,12 @@ using BCryptHash = BCrypt.Net.BCrypt;
 public class UserProfileService
 {
     private readonly IMongoCollection<User> _user;
-    public UserProfileService(IMongoDatabase MongoDb)
+    private readonly UserSettingService _userSettingService;
+    public UserProfileService(IMongoDatabase MongoDb, UserSettingService userSettingService)
     {
         _user = MongoDb.GetCollection<User>("User");
+        _userSettingService = userSettingService;
+
     }
     public async Task<User> GetUserProfile(string IdString)
     {
@@ -42,6 +45,7 @@ public class UserProfileService
         };
         await _user.InsertOneAsync(newUser);
         //addUserSettingService method
+        await _userSettingService.PostUserSettings(newUser.Id);
     }
     
     //UpdateUserProfileMethods
