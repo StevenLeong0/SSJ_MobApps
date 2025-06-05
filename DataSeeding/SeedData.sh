@@ -1,4 +1,4 @@
 #!/bin/bash
 echo "Seeding SeniorLearnDb..."
-mongosh SLearnMobApp_db SeedData.js
+mongosh SLearnMobApp_db DataSeeding/SeedData.js
 echo "Seeds Planted"

@@ -1,3 +1,5 @@
+namespace SeniorLearnApi.Interfaces;
+
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 public interface IBulletinModel

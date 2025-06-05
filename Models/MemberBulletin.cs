@@ -1,8 +1,11 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
+using SeniorLearnApi.Interfaces;
+using SeniorLearnApi.Enums;
 
+namespace SeniorLearnApi.Models;
 
-public class MemberBulletin:IBulletinModel
+public class MemberBulletin : IBulletinModel
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
@@ -11,7 +14,7 @@ public class MemberBulletin:IBulletinModel
     // public MemberType Type { get; set; }
     public MemberBulletinCategory Category { get; set; }
     //public MemberBulletinCategory Category 
-    
+
     public string? Content { get; set; }
     [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
     public DateTime? DateCreated { get; set; }

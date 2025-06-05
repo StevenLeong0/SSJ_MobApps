@@ -1,6 +1,11 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-public class OfficialBulletin:IBulletinModel
+using SeniorLearnApi.Enums;
+using SeniorLearnApi.Interfaces;
+
+
+namespace SeniorLearnApi.Models;
+public class OfficialBulletin : IBulletinModel
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]

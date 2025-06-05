@@ -2,7 +2,7 @@ using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using BCryptHash = BCrypt.Net.BCrypt;
-
+using SeniorLearnApi.Models;
 
 public class UserProfileService
 {

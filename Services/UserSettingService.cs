@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
-
+using SeniorLearnApi.Models;
 
 public class UserSettingService
 {

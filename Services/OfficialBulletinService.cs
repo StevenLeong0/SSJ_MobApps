@@ -1,7 +1,9 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
-
+using SeniorLearnApi.Enums;
+using SeniorLearnApi.Interfaces;
+using SeniorLearnApi.Models;
 
 public class OfficialBulletinService : IBulletinTypeListService<OfficialBulletin>
 {

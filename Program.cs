@@ -1,6 +1,9 @@
-using MongoDbSettingsabc;
+using SeniorLearnApi.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using System.Diagnostics;
+using SeniorLearnApi.Interfaces;
+
 
 var builder = WebApplication.CreateBuilder(args);
 // Bind Settings
@@ -40,7 +43,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
+DeleteMongoDbScript();
+RunMongoScript();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
@@ -48,3 +52,76 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+void DeleteMongoDbScript()
+{
+        try
+    {
+        var process = new Process
+        {
+            StartInfo = new ProcessStartInfo
+            {
+                FileName = "/bin/bash", 
+                Arguments = "DataSeeding/DeleteSeedData.sh",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+            }
+        };
+
+        process.Start();
+
+        string output = process.StandardOutput.ReadToEnd();
+        string error = process.StandardError.ReadToEnd();
+        process.WaitForExit();
+
+        Console.WriteLine($"Mongo script output:\n{output}");
+        if (!string.IsNullOrWhiteSpace(error))
+        {
+            Console.WriteLine($"Mongo script error:\n{error}");
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error running MongoDB script: {ex.Message}");
+    }
+}
+
+
+
+void RunMongoScript()
+{
+    try
+    {
+        var process = new Process
+        {
+            StartInfo = new ProcessStartInfo
+            {
+                FileName = "DataSeeding/SeedData.sh", // Assumes 'mongo' is in PATH
+                Arguments = "\"mongodb://localhost:27017/SLearnMobApp_db\" DataSeeding/SeedData.sh",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+            }
+        };
+
+        process.Start();
+
+        string output = process.StandardOutput.ReadToEnd();
+        string error = process.StandardError.ReadToEnd();
+        process.WaitForExit();
+
+        Console.WriteLine($"Mongo script output:\n{output}");
+        if (!string.IsNullOrWhiteSpace(error))
+        {
+            Console.WriteLine($"Mongo script error:\n{error}");
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error running MongoDB script: {ex.Message}");
+    }
+}
+

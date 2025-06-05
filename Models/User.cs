@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using SeniorLearnApi.Enums;
+namespace SeniorLearnApi.Models;
 public class User
 {
     [BsonId]

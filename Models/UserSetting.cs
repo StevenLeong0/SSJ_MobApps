@@ -1,5 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+
+namespace SeniorLearnApi.Models;
 public class UserSetting
 {
     [BsonId]

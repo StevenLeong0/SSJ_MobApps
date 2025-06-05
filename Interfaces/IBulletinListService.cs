@@ -1,3 +1,5 @@
+namespace SeniorLearnApi.Interfaces;
+
 public interface IBulletinTypeListService<T>
 {
     Task<List<T>> GetBulletinListByDate<U>(U Category);

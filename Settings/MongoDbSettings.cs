@@ -1,5 +1,5 @@
 //POCO
-namespace MongoDbSettingsabc;
+namespace SeniorLearnApi.Models;
 public class MongoDbSettings
 {
     public required string ConnectionString { get; set; }

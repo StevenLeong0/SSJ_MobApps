@@ -2,6 +2,9 @@ using System.Collections.ObjectModel;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
+using SeniorLearnApi.Enums;
+using SeniorLearnApi.Interfaces;
+using SeniorLearnApi.Models;
 
 public class MemberBulletinListService : IBulletinTypeListService<MemberBulletin>
 {

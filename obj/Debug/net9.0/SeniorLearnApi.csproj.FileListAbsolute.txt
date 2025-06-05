@@ -37,3 +37,5 @@
 /home/home1/SeniorLearnApi/bin/Debug/net9.0/SharpCompress.dll
 /home/home1/SeniorLearnApi/bin/Debug/net9.0/Snappier.dll
 /home/home1/SeniorLearnApi/bin/Debug/net9.0/ZstdSharp.dll
+/home/home1/SeniorLearnApi/obj/Debug/net9.0/SeniorLearnApi.sourcelink.json
+/home/home1/SeniorLearnApi/bin/Debug/net9.0/BCrypt.Net-Next.dll
