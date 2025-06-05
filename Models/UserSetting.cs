@@ -1,5 +1,8 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+
+namespace SeniorLearnApi.Models;
+
 public class UserSetting
 {
     [BsonId]
@@ -8,5 +11,4 @@ public class UserSetting
     public int TextSize { get; set; }
     public bool DarkMode { get; set; }
     public bool EnableNotifications { get; set; }
-
 }

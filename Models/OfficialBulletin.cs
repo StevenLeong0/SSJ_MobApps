@@ -1,5 +1,10 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using SeniorLearnApi.Enums;
+using SeniorLearnApi.Interfaces;
+
+namespace SeniorLearnApi.Models;
+
 public class OfficialBulletin:IBulletinModel
 {
     [BsonId]
@@ -12,7 +17,8 @@ public class OfficialBulletin:IBulletinModel
     public DateTime? DateCreated { get; set; }
     [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
     public DateTime? DateUpdated { get; set; }
-    public required string Author { get; set; }
+    public required string AuthorId { get; set; }
+    public required string AuthorName { get; set; }
     public OfficialBulletin()
     {
         DateCreated = DateTime.Now;

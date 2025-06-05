@@ -1,7 +1,8 @@
-using Microsoft.Extensions.Options;
-using MongoDB.Driver;
 using MongoDB.Bson;
-using MongoDbSettingsabc;
+using MongoDB.Driver;
+using SeniorLearnApi.Interfaces;
+
+namespace SeniorLearnApi.Services;
 
 //T is generic so you can put MemberBulletin or OfficialBulletin [StevenLeong]
 public class ShowBulletinDetailsService<T> : IShowBulletinService<T> where T : IBulletinModel

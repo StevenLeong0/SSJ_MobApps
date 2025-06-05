@@ -1,6 +1,9 @@
-using Microsoft.AspNetCore.Identity;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using SeniorLearnApi.Enums;
+
+namespace SeniorLearnApi.Models;
+
 public class User
 {
     [BsonId]
@@ -13,5 +16,4 @@ public class User
     public required string Email { get; set; }
     public required DateTime MemberSince { get; set; }
     public UserRole Role { get; set; }
-
 }

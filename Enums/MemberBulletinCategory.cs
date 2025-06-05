@@ -1,4 +1,6 @@
-public enum MemberType
+namespace SeniorLearnApi.Enums;
+
+public enum MemberBulletinCategory
 {
     Interest,
     Event,

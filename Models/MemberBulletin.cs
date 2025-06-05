@@ -1,6 +1,9 @@
-using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using SeniorLearnApi.Enums;
+using SeniorLearnApi.Interfaces;
 
+namespace SeniorLearnApi.Models;
 
 public class MemberBulletin:IBulletinModel
 {

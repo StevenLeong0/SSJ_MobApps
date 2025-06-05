@@ -1,7 +1,10 @@
-using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using SeniorLearnApi.DTOs.Requests;
+using SeniorLearnApi.DTOs.Responses;
+using SeniorLearnApi.Models;
 
+namespace SeniorLearnApi.Services;
 
 public class UserSettingService
 {
@@ -12,49 +15,83 @@ public class UserSettingService
     {
         _userSetting = MongoDb.GetCollection<UserSetting>("UserSetting");
     }
-    public async Task<UserSetting> GetUserSetting(string IdString)
+
+    #region User Setting Methods
+
+    public async Task<SettingsResponse> GetUserSettingsAsync(string userId)
     {
-        if (ObjectId.TryParse(IdString, out ObjectId objectId))
+        if (ObjectId.TryParse(userId, out ObjectId objectId))
         {
             var filter = Builders<UserSetting>.Filter.Eq("_id", objectId);
-            var UserSetting = await _userSetting
-            .Find(filter)
-            .FirstOrDefaultAsync();
-            return UserSetting;
+            var userSetting = await _userSetting
+                .Find(filter)
+                .FirstOrDefaultAsync();
+
+            if (userSetting == null)
+            {
+                return null;
+            }
+
+            return MapToSettingsResponse(userSetting);
         }
         else
         {
-            //TASK1Settings: need to write a try-catch block to catch this exception
-            throw new ArgumentException("Invalid Id", nameof(IdString));
+            throw new ArgumentException("Invalid Id", nameof(userId));
         }
     }
-    public async Task PostUserSettings(string Id)
+
+    public async Task CreateUserSettingsAsync(string userId)
     {
-        UserSetting PostUserSettings = new()
+        UserSetting newUserSettings = new()
         {
-            Id = Id,
+            Id = userId,
             TextSize = 32,
             DarkMode = false,
             EnableNotifications = true,
         };
-        await _userSetting.InsertOneAsync(PostUserSettings);
+
+        await _userSetting.InsertOneAsync(newUserSettings);
     }
-        public async Task UpdateUserSetting(string IdString, int TextSize, bool DarkMode, bool EnableNotifications)
+
+    public async Task<SettingsResponse> UpdateUserSettingsAsync(string userId, UpdateSettingsRequest request)
     {
-        if (ObjectId.TryParse(IdString, out ObjectId objectId))
+        if (ObjectId.TryParse(userId, out ObjectId objectId))
         {
             var filter = Builders<UserSetting>.Filter.Eq("_id", objectId);
             var update = Builders<UserSetting>.Update
-            .Set(u => u.TextSize, TextSize)
-            .Set(u => u.DarkMode, DarkMode)
-            .Set(u => u.EnableNotifications, EnableNotifications);
+                .Set(u => u.TextSize, request.TextSize)
+                .Set(u => u.DarkMode, request.DarkMode)
+                .Set(u => u.EnableNotifications, request.EnableNotifications);
+
             await _userSetting.UpdateOneAsync(filter, update);
+
+            var updatedUserSetting = await _userSetting.Find(filter).FirstOrDefaultAsync();
+            if (updatedUserSetting == null)
+            {
+                return null;
+            }
+
+            return MapToSettingsResponse(updatedUserSetting);
         }
         else
         {
-            //TASK1Settings: need to write a try-catch block to catch this exception
-            throw new ArgumentException("Invalid Id", nameof(IdString));
+            throw new ArgumentException("Invalid Id", nameof(userId));
         }
     }
 
+    #endregion
+
+    #region Mapping Methods
+
+    private static SettingsResponse MapToSettingsResponse(UserSetting userSetting)
+    {
+        return new SettingsResponse
+        {
+            TextSize = userSetting.TextSize,
+            DarkMode = userSetting.DarkMode,
+            EnableNotifications = userSetting.EnableNotifications
+        };
+    }
+
+    #endregion
 }

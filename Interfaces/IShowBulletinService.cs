@@ -1,3 +1,4 @@
+namespace SeniorLearnApi.Interfaces;
 
 public interface IShowBulletinService<T>
 {
