@@ -22,13 +22,13 @@ public class UserContextService
     public string? GetUserId()
     {
         var user = GetCurrentUser();
-        return user?.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+        return user?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
     }
 
     public string? GetUsername()
     {
         var user = GetCurrentUser();
-        return user?.FindFirst(JwtRegisteredClaimNames.UniqueName)?.Value;
+        return user?.FindFirst(ClaimTypes.Name)?.Value;
     }
 
     public UserRole? GetUserRole()
