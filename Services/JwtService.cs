@@ -20,7 +20,7 @@ public class JwtService
     {
         var claims = new List<Claim>
         {
-            new(JwtRegisteredClaimNames.Sub, user.Id),
+            new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new(JwtRegisteredClaimNames.UniqueName, user.Username),
             new(ClaimTypes.Role, user.Role.ToString())
         };
