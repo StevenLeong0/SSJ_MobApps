@@ -20,13 +20,15 @@ public class AuthService
     // Mock data storage
     private static readonly List<User> _users = new();
 
-    public AuthService(IMongoDatabase MongoDb, JwtSettings jwtSettings, JwtService jwtService, RefreshTokenService refreshTokenService)
+    public AuthService(IMongoDatabase MongoDb, JwtSettings jwtSettings, JwtService jwtService, UserSettingService userSettingService, RefreshTokenService refreshTokenService)
     {
         _user = MongoDb.GetCollection<User>("User");
         _jwtSettings = jwtSettings;
         _jwtService = jwtService;
+        _userSettingService = userSettingService;
         _refreshTokenService = refreshTokenService;
     }
+
 
     public async Task<User?> RegisterAsync(RegisterRequest request)
     {

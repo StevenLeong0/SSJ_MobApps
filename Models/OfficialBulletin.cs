@@ -5,7 +5,7 @@ using SeniorLearnApi.Interfaces;
 
 namespace SeniorLearnApi.Models;
 
-public class OfficialBulletin:IBulletinModel
+public class OfficialBulletin : IBulletinModel
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]

@@ -1,4 +1,6 @@
 const bcrypt = require ('bcrypt');
+
+
 db = connect ("mongodb://localhost:9887/SLearnMobApp_db")
 //ObjectId() for MongoDBShell, JS, and Node.js
 //GenerateNewId() used in C# with MongoDB.Driver
@@ -12,11 +14,13 @@ async function HashPassword(plainPassword){
 /*
 https://www.reddit.com/r/node/comments/17m8b4p/best_node_hashing_algorithm_option/
 */
+
+const userIds= [];
+for (let i = 0;i<8;i++){
+    userIds.push(new ObjectId());
+}  
 if (db.User.countDocuments({})===0){
-    const userIds= [];
-    for (let i = 0;i<8;i++){
-        userIds.push(ObjectId());
-    }  
+
     db.User.insertMany([
         {
             Id: userIds[0],
@@ -97,49 +101,49 @@ if (db.UserSetting.countDocuments({})===0){
         {
             Id: userIds[0],
             TextSize: 36,
-            DarkMode: False,
+            DarkMode: false,
             EnableNotification: false,
         },
         {
             Id: userIds[1],
             TextSize: 36,
-            DarkMode: True,
+            DarkMode: true,
             EnableNotification: false,
         },
         {
             Id: userIds[2],
             TextSize: 32,
-            DarkMode: True,
+            DarkMode: true,
             EnableNotification: false,
         },
         {
             Id: userIds[3],
             TextSize: 24,
-            DarkMode: True,
+            DarkMode: true,
             EnableNotification: false,
         },
         {
             Id: userIds[4],
             TextSize: 36,
-            DarkMode: True,
+            DarkMode: true,
             EnableNotification: false,
         },
         {
             Id: userIds[5],
             TextSize: 36,
-            DarkMode: True,
+            DarkMode: true,
             EnableNotification: false,
         },
         {
             Id: userIds[6],
             TextSize: 36,
-            DarkMode: True,
+            DarkMode: true,
             EnableNotification: false,
         },
         {
             Id: userIds[7],
             TextSize: 36,
-            DarkMode: True,
+            DarkMode: true,
             EnableNotification: false,
         }
     ])
@@ -150,93 +154,93 @@ if (db.UserSetting.countDocuments({})===0){
 if (db.MemberBulletin.countDocuments({})===0){
     db.MemberBulletin.insertMany([
         {
-            Id:ObjectId.GenerateNewId().ToString(),
+            Id:new ObjectId(),
             Title: "Ice-Cream Party",
             Category: 2,
             Content:"Ice Cream Party to celebrate the 1st June for all SeniorLearn Members. Buy one get one free",
             DateCreated:new Date(2025, 4, 9, 15,30,45),
-            DateUpdated:DateCreated,
-            AuthorId:userIds[1].ToString(),
+            DateUpdated:new Date(2025, 4, 9, 15,30,45),
+            AuthorId:userIds[1],
             AuthorUsername:"AnonUser123"
         },
         {
-            Id:ObjectId.GenerateNewId().ToString(),
+            Id:new ObjectId(),
             Title: "Free Dental Seniors Only",
             Category: 2,
             Content: "Come to Ha Loo Loo Dental for your free dental check-up. Offer lasts for the next 3 days!",
             DateCreated:new Date(2025,4,4, 15,30,45),
-            DateUpdated: DateCreated,
-            AuthorId:userIds[2].ToString(),
+            DateUpdated: new Date(2025,4,4, 15,30,45),
+            AuthorId:userIds[2],
             AuthorUsername:"User101"
         },
         {
-            Id:ObjectId.GenerateNewId().ToString(),
+            Id:new ObjectId(),
             Title: "Theatre Night: Matilda",
             Category: 2,
             Content: "She felt fairly confident that with a great deal of practice and effort, she would succeed in the end.",
             DateCreated:new Date(2025,4,3, 15,30,45),
-            DateUpdated: DateCreated,
-            AuthorId:userIds[3].ToString(),
+            DateUpdated: new Date(2025,4,3, 15,30,45),
+            AuthorId:userIds[3],
             AuthorUsername:"TheatreSenior"
         },
         {
-            Id:ObjectId.GenerateNewId().ToString(),
+            Id:new ObjectId(),
             Title: "Martial Arts Lessons",
             Category: 1,
             Content: "Whenever you can separate Yin and Yang, one part doesn’t move, the other part moves, there has to be a relationship between them.",
             DateCreated:new Date(2025,4,9, 15,30,45),
-            DateUpdated: DateCreated,
-            AuthorId:userIds[4].ToString(),
+            DateUpdated: new Date(2025,4,9, 15,30,45),
+            AuthorId:userIds[4],
             AuthorUsername:"ChenZhonghua"
         },
         {
-            Id:ObjectId.GenerateNewId().ToString(),
+            Id:new ObjectId(),
             Title: "Boogie Woogie",
             Category: 1,
             Content: "Just joking, I'm gonna teach programming instead",
             DateCreated:new Date(2025,4,4, 15,30,45),
-            DateUpdated: DateCreated,
-            AuthorId:userIds[5].ToString(),
+            DateUpdated: new Date(2025,4,4, 15,30,45),
+            AuthorId:userIds[5],
             AuthorUsername:"Peter"
         },
         {
-            Id: ObjectId.GenerateNewId().ToString(),
+            Id: new ObjectId(),
             Title:"Seance Magic Talk to your Wife Today!!",
             Category:1,
             Content: "For the cheap price of $99, talk to the dead!!",
             DateCreated:new Date(2025,4,3, 15,30,45),
-            DateUpdated: DateCreated,
-            AuthorId:userIds[6].ToString(),
+            DateUpdated: new Date(2025,4,3, 15,30,45),
+            AuthorId:userIds[6],
             AuthorUsername:"SeniorScammer"
         },
         {
-            Id: ObjectId.GenerateNewId().ToString(),
+            Id: new ObjectId(),
             Title:"CelebratingSeniorLearnFan!!",
             Category:3,
             Content: "Woohoo",
             DateCreated:new Date(2025,4,9, 15,30,45),
-            DateUpdated: DateCreated,
-            AuthorId:userIds[7].ToString(),
+            DateUpdated: new Date(2025,4,9, 15,30,45),
+            AuthorId:userIds[7],
             AuthorUsername:"SeniorLearnFan"
         },
         {
-            Id: ObjectId.GenerateNewId().ToString(),
+            Id: new ObjectId(),
             Title:"CelebratingSeniorLearnFan!!",
             Category:3,
             Content: "Woohoo",
             DateCreated:new Date(2025,4,4, 15,30,45),
-            DateUpdated: DateCreated,
-            AuthorId:userIds[7].ToString(),
+            DateUpdated: new Date(2025,4,4, 15,30,45),
+            AuthorId:userIds[7],
             AuthorUsername:"SeniorLearnFan"
         },
         {
-            Id: ObjectId.GenerateNewId().ToString(),
+            Id: new ObjectId(),
             Title:"SeniorLearn App Out Now!",
             Category:3,
             Content: "Seniors need to learn technology now!! WOO HOO",
             DateCreated:new Date(2025,4,3, 15,30,45),
-            DateUpdated: DateCreated,
-            AuthorId:userIds[7].ToString(),
+            DateUpdated: new Date(2025,4,3, 15,30,45),
+            AuthorId:userIds[7],
             AuthorUsername:"SeniorLearnFan"
         }
     ])
@@ -244,30 +248,30 @@ if (db.MemberBulletin.countDocuments({})===0){
 if (db.OfficialBulletin.countDocuments({})===0){
     db.OfficialBulletin.insertMany([
         {
-            Id: ObjectId.GenerateNewId().ToString(),
+            Id: new ObjectId(),
             Title:"Important Organisation Update",
             Type:1,
             Content: "Dear SeniorLearn members,We are pleased to announce some important updates to our organisation that we believe will enhance your learning experience.Sincerely, The SeniorLearnTeam",
             DateCreated:new Date(2025,4,9, 15,30,45),
-            DateUpdated: DateCreated,
+            DateUpdated: new Date(2025,4,9, 15,30,45),
             Author:"Admin"
         },
         {
-            Id: ObjectId.GenerateNewId().ToString(),
+            Id: new ObjectId(),
             Title:"Monthly Meeting Cancelled",
             Type:3,
             Content: "Someone got sick, its cancelled folks",
             DateCreated:new Date(2025,4,9, 15,30,45),
-            DateUpdated: DateCreated,
+            DateUpdated: new Date(2025,4,9, 15,30,45),
             Author:"Admin"
         },
         {
-            Id: ObjectId.GenerateNewId().ToString(),
+            Id: new ObjectId(),
             Title:"SeniorLearn App Out Now!",
             Type:2,
             Content: "The SeniorLearn App is out now! It took a long time to make but its finally done. We are also gonna hold lessons on how to use it so stay tune!",
             DateCreated:new Date(2025,4,9, 15,30,45),
-            DateUpdated: DateCreated,
+            DateUpdated:new Date(2025,4,9, 15,30,45),
             Author:"Admin"
         }
     ])

@@ -2,12 +2,14 @@ using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using SeniorLearnApi.Configuration;
+using SeniorLearnApi.DataSeeding;
 using SeniorLearnApi.Extensions;
 using SeniorLearnApi.Interfaces;
 using SeniorLearnApi.Middleware;
 using SeniorLearnApi.Models;
 using SeniorLearnApi.Services;
 using SeniorLearnApi.Settings;
+using System.Diagnostics;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -92,7 +94,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+DeleteMongoDbScript();
+await RunMongoScript();
 app.UseHttpsRedirection();
 
 app.UseMiddleware<GlobalExceptionMiddleware>();
@@ -121,3 +124,85 @@ using (var scope = app.Services.CreateScope())
 // --------------------
 
 app.Run();
+
+void DeleteMongoDbScript()
+{
+        try
+    {
+        var process = new Process
+        {
+            StartInfo = new ProcessStartInfo
+            {
+                FileName = "/bin/bash", 
+                Arguments = "DataSeeding/DeleteSeedData.sh",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+            }
+        };
+
+        process.Start();
+
+        string output = process.StandardOutput.ReadToEnd();
+        string error = process.StandardError.ReadToEnd();
+        process.WaitForExit();
+
+        Console.WriteLine($"Mongo script output:\n{output}");
+        if (!string.IsNullOrWhiteSpace(error))
+        {
+            Console.WriteLine($"Mongo script error:\n{error}");
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error running MongoDB script: {ex.Message}");
+    }
+}
+
+
+async Task RunMongoScript() // Fixed: Made async
+{
+    // To seed data
+    await DatabaseSeedRunner.RunMongoSeedAsync();
+    // To delete data (commented out as it would delete right after seeding)
+    // await DatabaseSeedRunner.DeleteMongoDataAsync();
+    // With custom connection string (commented out to avoid duplicate seeding)
+    // await DatabaseSeedRunner.RunMongoSeedAsync("mongodb://localhost:27017", "SeniorLearnBulletin");
+}
+
+//void RunMongoScript()
+//{
+//    try
+//    {
+//        var process = new Process
+//        {
+//            StartInfo = new ProcessStartInfo
+//            {
+//                FileName = "DataSeeding/SeedData.sh", // Assumes 'mongo' is in PATH
+//                Arguments = "\"mongodb://localhost:27017/SLearnMobApp_db\" DataSeeding/SeedData.sh",
+//                RedirectStandardOutput = true,
+//                RedirectStandardError = true,
+//                UseShellExecute = false,
+//                CreateNoWindow = true,
+//            }
+//        };
+
+//        process.Start();
+
+//        string output = process.StandardOutput.ReadToEnd();
+//        string error = process.StandardError.ReadToEnd();
+//        process.WaitForExit();
+
+//        Console.WriteLine($"Mongo script output:\n{output}");
+//        if (!string.IsNullOrWhiteSpace(error))
+//        {
+//            Console.WriteLine($"Mongo script error:\n{error}");
+//        }
+//    }
+//    catch (Exception ex)
+//    {
+//        Console.WriteLine($"Error running MongoDB script: {ex.Message}");
+//    }
+//}
+
