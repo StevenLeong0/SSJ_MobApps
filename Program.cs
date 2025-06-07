@@ -1,3 +1,4 @@
+using Microsoft.Extensions.ObjectPool;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -9,8 +10,10 @@ using SeniorLearnApi.Middleware;
 using SeniorLearnApi.Models;
 using SeniorLearnApi.Services;
 using SeniorLearnApi.Settings;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text.Json.Serialization;
+using ZstdSharp.Unsafe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -94,8 +97,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-// DeleteMongoDbScript();
-// await RunMongoScript();
+//DeleteMongoDbScript();
+await RunMongoScript();
 app.UseHttpsRedirection();
 
 app.UseMiddleware<GlobalExceptionMiddleware>();
@@ -125,48 +128,50 @@ using (var scope = app.Services.CreateScope())
 
 app.Run();
 
-void DeleteMongoDbScript()
-{
-        try
-    {
-        var process = new Process
-        {
-            StartInfo = new ProcessStartInfo
-            {
-                FileName = "/bin/bash", 
-                Arguments = "DataSeeding/DeleteSeedData.sh",
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true,
-            }
-        };
+// async Task DeleteMongoDbScript(IMongoDatabase MongoDb)
+// {
+    //     try
+    // {
+    //     var process = new Process
+    //     {
+    //         StartInfo = new ProcessStartInfo
+    //         {
+    //             FileName = "/bin/bash", 
+    //             Arguments = "DataSeeding/DeleteSeedData.sh",
+    //             RedirectStandardOutput = true,
+    //             RedirectStandardError = true,
+    //             UseShellExecute = false,
+    //             CreateNoWindow = true,
+    //         }
+    //     };
 
-        process.Start();
+    //     process.Start();
 
-        string output = process.StandardOutput.ReadToEnd();
-        string error = process.StandardError.ReadToEnd();
-        process.WaitForExit();
+    //     string output = process.StandardOutput.ReadToEnd();
+    //     string error = process.StandardError.ReadToEnd();
+    //     process.WaitForExit();
 
-        Console.WriteLine($"Mongo script output:\n{output}");
-        if (!string.IsNullOrWhiteSpace(error))
-        {
-            Console.WriteLine($"Mongo script error:\n{error}");
-        }
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Error running MongoDB script: {ex.Message}");
-    }
-}
+    //     Console.WriteLine($"Mongo script output:\n{output}");
+    //     if (!string.IsNullOrWhiteSpace(error))
+    //     {
+    //         Console.WriteLine($"Mongo script error:\n{error}");
+    //     }
+    // }
+    // catch (Exception ex)
+    // {
+    //     Console.WriteLine($"Error running MongoDB script: {ex.Message}");
+    // }
+// }
 
 
 async Task RunMongoScript() // Fixed: Made async
 {
+
+    await DatabaseSeedRunner.DeleteMongoDataAsync();
     // To seed data
-    await DatabaseSeedRunner.RunMongoSeedAsync();
+    //await DatabaseSeedRunner.RunMongoSeedAsync();
     // To delete data (commented out as it would delete right after seeding)
-    // await DatabaseSeedRunner.DeleteMongoDataAsync();
+    //await DatabaseSeedRunner.DeleteMongoDataAsync();
     // With custom connection string (commented out to avoid duplicate seeding)
     // await DatabaseSeedRunner.RunMongoSeedAsync("mongodb://localhost:27017", "SeniorLearnBulletin");
 }

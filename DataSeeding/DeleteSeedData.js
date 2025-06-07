@@ -1,6 +1,4 @@
 
-
-
 db = connect ("mongodb://localhost:9887/SLearnMobApp_db")
 
 const collections = ["User","MemberBulletin", "OfficialBulletin", "UserSetting"];
