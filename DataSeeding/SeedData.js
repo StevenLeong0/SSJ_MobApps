@@ -100,49 +100,49 @@ if (db.UserSetting.countDocuments({})===0){
     db.UserSetting.insertMany([
         {
             Id: userIds[0],
-            TextSize: 36,
+            FontSize: 36,
             DarkMode: false,
             EnableNotification: false,
         },
         {
             Id: userIds[1],
-            TextSize: 36,
+            FontSize: 36,
             DarkMode: true,
             EnableNotification: false,
         },
         {
             Id: userIds[2],
-            TextSize: 32,
+            FontSize: 32,
             DarkMode: true,
             EnableNotification: false,
         },
         {
             Id: userIds[3],
-            TextSize: 24,
+            FontSize: 24,
             DarkMode: true,
             EnableNotification: false,
         },
         {
             Id: userIds[4],
-            TextSize: 36,
+            FontSize: 36,
             DarkMode: true,
             EnableNotification: false,
         },
         {
             Id: userIds[5],
-            TextSize: 36,
+            FontSize: 36,
             DarkMode: true,
             EnableNotification: false,
         },
         {
             Id: userIds[6],
-            TextSize: 36,
+            FontSize: 36,
             DarkMode: true,
             EnableNotification: false,
         },
         {
             Id: userIds[7],
-            TextSize: 36,
+            FontSize: 36,
             DarkMode: true,
             EnableNotification: false,
         }

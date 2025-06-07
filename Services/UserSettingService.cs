@@ -45,7 +45,7 @@ public class UserSettingService
         UserSetting newUserSettings = new()
         {
             Id = userId,
-            TextSize = 32,
+            FontSize = 32,
             DarkMode = false,
             EnableNotifications = true,
         };
@@ -59,7 +59,7 @@ public class UserSettingService
         {
             var filter = Builders<UserSetting>.Filter.Eq("_id", objectId);
             var update = Builders<UserSetting>.Update
-                .Set(u => u.TextSize, request.TextSize)
+                .Set(u => u.FontSize, request.FontSize)
                 .Set(u => u.DarkMode, request.DarkMode)
                 .Set(u => u.EnableNotifications, request.EnableNotifications);
 
@@ -87,7 +87,7 @@ public class UserSettingService
     {
         return new SettingsResponse
         {
-            TextSize = userSetting.TextSize,
+            FontSize = userSetting.FontSize,
             DarkMode = userSetting.DarkMode,
             EnableNotifications = userSetting.EnableNotifications
         };

@@ -169,14 +169,14 @@ public class DatabaseSeeder
         {
             var userSettings = new List<UserSetting>
             {
-                new UserSetting { Id = _userIds[0], TextSize = 36, DarkMode = false, EnableNotifications = false },
-                new UserSetting { Id = _userIds[1], TextSize = 36, DarkMode = true, EnableNotifications = false },
-                new UserSetting { Id = _userIds[2], TextSize = 32, DarkMode = true, EnableNotifications = false },
-                new UserSetting { Id = _userIds[3], TextSize = 24, DarkMode = true, EnableNotifications = false },
-                new UserSetting { Id = _userIds[4], TextSize = 36, DarkMode = true, EnableNotifications = false },
-                new UserSetting { Id = _userIds[5], TextSize = 36, DarkMode = true, EnableNotifications = false },
-                new UserSetting { Id = _userIds[6], TextSize = 36, DarkMode = true, EnableNotifications = false },
-                new UserSetting { Id = _userIds[7], TextSize = 36, DarkMode = true, EnableNotifications = false }
+                new UserSetting { Id = _userIds[0], FontSize = 36, DarkMode = false, EnableNotifications = false },
+                new UserSetting { Id = _userIds[1], FontSize = 36, DarkMode = true, EnableNotifications = false },
+                new UserSetting { Id = _userIds[2], FontSize = 32, DarkMode = true, EnableNotifications = false },
+                new UserSetting { Id = _userIds[3], FontSize = 24, DarkMode = true, EnableNotifications = false },
+                new UserSetting { Id = _userIds[4], FontSize = 36, DarkMode = true, EnableNotifications = false },
+                new UserSetting { Id = _userIds[5], FontSize = 36, DarkMode = true, EnableNotifications = false },
+                new UserSetting { Id = _userIds[6], FontSize = 36, DarkMode = true, EnableNotifications = false },
+                new UserSetting { Id = _userIds[7], FontSize = 36, DarkMode = true, EnableNotifications = false }
             };
             await userSettingCollection.InsertManyAsync(userSettings);
         }
